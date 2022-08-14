@@ -451,6 +451,19 @@ def prepare_dataset4exprement(dataset):
 
 
 def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3):
+   try: 
+    shutil.rmtree('/content/OpenKE/benchmarks/dataset_test1')
+  except:
+    pass
+  try: 
+    shutil.rmtree('/content/OpenKE/benchmarks/dataset_test2')
+  except:
+    pass
+
+  try: 
+    shutil.rmtree('/content/OpenKE/benchmarks/dataset_test3')
+  except:
+    pass
   #this is the last stage, takes files and create 2-3 datasets for running exprements
   pathlib.Path('dataset_test3').mkdir(parents=True, exist_ok=True) 
   # !mkdir dataset_test3
