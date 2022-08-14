@@ -403,7 +403,7 @@ def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3
   #this is the last stage, takes files and create 2-3 datasets for running exprements
   pathlib.Path('dataset_test3').mkdir(parents=True, exist_ok=True) 
   # !mkdir dataset_test3
-  dataset_creator(train_exp1,test_exp1,test3,'dataset_test3')
+  dataset_creator(train_exp1,test3,test3,'dataset_test3')
   os.chdir('dataset_test3')
   # %cd dataset_test3
   n2n_py()
