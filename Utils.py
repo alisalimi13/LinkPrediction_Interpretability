@@ -450,7 +450,7 @@ def prepare_dataset4exprement(dataset):
   os.chdir('/content')
 
 
-def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3,dataset):
+def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3,WholeGraph):
   try: 
     shutil.rmtree('/content/OpenKE/benchmarks/dataset_test1')
   except:
@@ -465,7 +465,7 @@ def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3
   except:
     pass
   
-  _,_,_,WholeGraph = read_dataset(dataset)
+#   _,_,_,WholeGraph = read_dataset(dataset)
   #this is the last stage, takes files and create 2-3 datasets for running exprements
   pathlib.Path('dataset_test3').mkdir(parents=True, exist_ok=True) 
   dataset_creator(train_exp1,test3,test3,WholeGraph,'dataset_test3')
