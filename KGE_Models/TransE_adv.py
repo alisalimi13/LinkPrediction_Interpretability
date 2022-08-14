@@ -106,7 +106,7 @@ from openke.data import TrainDataLoader, TestDataLoader
 
 # dataloader for training
 train_dataloader = TrainDataLoader(
-	in_path = "./benchmarks/dataset_test2/", 
+	in_path = "./benchmarks/dataset_test3/", 
 	batch_size = 2000,
 	threads = 8,
 	sampling_mode = "cross", 
