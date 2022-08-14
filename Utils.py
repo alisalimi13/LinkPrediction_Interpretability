@@ -378,3 +378,14 @@ def remove_coonections_of_graphs(v1,v2,train,test,valid,rate = 0.01):
   return train_exp1,valid_exp1, test_exp1 
 
 # train_exp1,valid_exp1, test_exp1 = remove_coonections_of_graphs(V1,V2,train,test,valid,rate = 0.01)
+
+
+
+def prepare_dataset4exprement(dataset):
+  train,valid,test,WholeGraph = read_dataset(dataset)
+  dataset_creator(train,test,valid)
+  os.chdir('/content/dataset')
+  n2n_py()
+  os.chdir('/content')
+
+
