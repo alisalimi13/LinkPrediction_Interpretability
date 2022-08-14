@@ -376,15 +376,18 @@ def remove_coonections_of_graphs(v1,v2,train,test,valid,rate = 0.01):
       continue
     test_exp1.append(row)
 
-  for row in test:
-    h,r,t = row
-    if h in V1 and t in V2:
-      AliSalim_Test.append(row)
-    if h in V2 and t in V1:
-      AliSalim_Test.append(row)
+#   for row in test:
+#     h,r,t = row
+#     if h in V1 and t in V2:
+#       AliSalim_Test.append(row)
+#     if h in V2 and t in V1:
+#       AliSalim_Test.append(row)
 
   for row in test:
     valid_exp1.append(row)
+    
+    
+  AliSalim_Test = [i for i in valid_exp1 if i not in test_exp1]
   return train_exp1,valid_exp1, test_exp1,AliSalim_Test 
 
 
