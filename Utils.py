@@ -451,7 +451,7 @@ def prepare_dataset4exprement(dataset):
 
 
 def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3):
-   try: 
+  try: 
     shutil.rmtree('/content/OpenKE/benchmarks/dataset_test1')
   except:
     pass
