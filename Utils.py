@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 import math
 import pathlib
 import os
+from distutils.dir_util import copy_tree
 
 
 def read_dataset(dataset):
@@ -419,3 +420,8 @@ def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3
   os.chdir('dataset_test1')
   n2n_py()
   os.chdir('..')
+  
+  
+  shutil.copytree('/content/dataset_test1', '/content/OpenKE/benchmarks/dataset_test1') 
+  shutil.copytree('/content/dataset_test2', '/content/OpenKE/benchmarks/dataset_test2') 
+  shutil.copytree('/content/dataset_test3', '/content/OpenKE/benchmarks/dataset_test3') 
