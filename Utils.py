@@ -38,12 +38,63 @@ def read_dataset(dataset):
   WholeGraph = train+valid+test
   return train,valid,test,WholeGraph
   
-def dataset_creator(train,test,valid,name = 'dataset'): 
+# def dataset_creator(train,test,valid,name = 'dataset'): 
+#   pathlib.Path('/content/dataset').mkdir(parents=True, exist_ok=True) 
+#   # create dataset in a format that suitable for openke
+#   shutil.copy('/content/OpenKE/benchmarks/FB13/n-n.py', '/content/'+name)
+
+#   graph = train + test + valid
+#   entities = [i[0] for i in graph] + [i[2] for i in graph] 
+#   relations= [i[1] for i in graph]
+#   entities = list(set(entities))
+#   relations = list(set(relations))
+#   ent_dict = {}
+#   for i in range(len(entities)):
+#     ent_dict[entities[i]] = i
+#   rel_dict = {}
+#   for i in range(len(relations)):
+#     rel_dict[relations[i]] = i    
+    
+#   f1 = open('/content/'+name+'/entity2id.txt','w')
+#   f1.write(str(len(ent_dict))+'\n')
+#   for k,v in ent_dict.items():
+#     f1.write(str(k)+'\t'+str(v)+ '\n')
+#   f1.close()
+
+#   f1 = open('/content/'+name+'/relation2id.txt','w')
+#   f1.write(str(len(rel_dict))+'\n')
+#   for k,v in rel_dict.items():
+#     f1.write(str(k)+'\t'+str(v)+ '\n')
+#   f1.close()
+
+
+#   f1 = open('/content/'+name+'/train2id.txt','w')
+#   f1.write(str(len(train))+'\n')
+#   for row in train:
+#     f1.write(str(ent_dict[row[0]])+' '+str(ent_dict[row[2]])+' '+str(rel_dict[row[1]])+'\n')
+
+#   f1.close()
+
+#   f1 = open('/content/'+name+'/test2id.txt','w')
+#   f1.write(str(len(test))+'\n')
+#   for row in test:
+#     f1.write(str(ent_dict[row[0]])+' '+str(ent_dict[row[2]])+' '+str(rel_dict[row[1]])+'\n')
+#   f1.close() 
+
+#   f1 = open('/content/'+name+'/valid2id.txt','w')
+#   f1.write(str(len(valid))+'\n')
+#   for row in valid:
+#     f1.write(str(ent_dict[row[0]])+' '+str(ent_dict[row[2]])+' '+str(rel_dict[row[1]])+'\n')
+#   f1.close() 
+
+#   subprocess.call("/content/"+name+"/n-n.py.py", shell=True)
+
+def dataset_creator(train,test,valid,Whole_graph = [],name = 'dataset'): 
   pathlib.Path('/content/dataset').mkdir(parents=True, exist_ok=True) 
   # create dataset in a format that suitable for openke
   shutil.copy('/content/OpenKE/benchmarks/FB13/n-n.py', '/content/'+name)
 
-  graph = train + test + valid
+  graph = train + test + valid + Whole_graph
   entities = [i[0] for i in graph] + [i[2] for i in graph] 
   relations= [i[1] for i in graph]
   entities = list(set(entities))
@@ -403,7 +454,7 @@ def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3
   #this is the last stage, takes files and create 2-3 datasets for running exprements
   pathlib.Path('dataset_test3').mkdir(parents=True, exist_ok=True) 
   # !mkdir dataset_test3
-  dataset_creator(train_exp1,test3,test3,'dataset_test3')
+  dataset_creator(train_exp1,test3,test3,WholeGraph,'dataset_test3')
   os.chdir('dataset_test3')
   # %cd dataset_test3
   n2n_py()
@@ -411,7 +462,7 @@ def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3
 
   #test2
   pathlib.Path('dataset_test2').mkdir(parents=True, exist_ok=True) 
-  dataset_creator(train_exp1,test_exp1,valid_exp1,'dataset_test2')
+  dataset_creator(train_exp1,test_exp1,valid_exp1,WholeGraph,'dataset_test2')
   os.chdir('dataset_test2')
   n2n_py()
   os.chdir('..')
@@ -419,7 +470,7 @@ def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3
 
   #test1
   pathlib.Path('dataset_test1').mkdir(parents=True, exist_ok=True) 
-  dataset_creator(train_exp1,valid_exp1,test_exp1,'dataset_test1')
+  dataset_creator(train_exp1,valid_exp1,test_exp1,WholeGraph,'dataset_test1')
   os.chdir('dataset_test1')
   n2n_py()
   os.chdir('..')
