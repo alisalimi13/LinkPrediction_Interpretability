@@ -425,3 +425,18 @@ def Prepare_data_into_files_for_exprement(train_exp1,valid_exp1, test_exp1,test3
   shutil.copytree('/content/dataset_test1', '/content/OpenKE/benchmarks/dataset_test1') 
   shutil.copytree('/content/dataset_test2', '/content/OpenKE/benchmarks/dataset_test2') 
   shutil.copytree('/content/dataset_test3', '/content/OpenKE/benchmarks/dataset_test3') 
+  
+  try: 
+    shutil.rmtree('/content/dataset_test1')
+  except:
+    pass
+  try: 
+    shutil.rmtree('/content/dataset_test2')
+  except:
+    pass
+
+  try: 
+    shutil.rmtree('/content/dataset_test3')
+  except:
+    pass
+
