@@ -348,6 +348,7 @@ def remove_coonections_of_graphs(v1,v2,train,test,valid,rate = 0.01):
   train_exp1 = [] # for two disjoint graph
   valid_exp1 = [] # test set
   test_exp1 = [] # for 2 disjoint graphs in test
+  AliSalim_Test = [] # for connections in between
   V1 = {}
   for item in v1:
     V1[item] = 1
@@ -373,12 +374,17 @@ def remove_coonections_of_graphs(v1,v2,train,test,valid,rate = 0.01):
     if h in V2 and t in V1:
       continue
     test_exp1.append(row)
+
+  for row in test:
+    h,r,t = row
+    if h in V1 and t in V2:
+      AliSalim_Test.append(row)
+    if h in V2 and t in V1:
+      AliSalim_Test.append(row)
+
   for row in test:
     valid_exp1.append(row)
-  return train_exp1,valid_exp1, test_exp1 
-
-# train_exp1,valid_exp1, test_exp1 = remove_coonections_of_graphs(V1,V2,train,test,valid,rate = 0.01)
-
+  return train_exp1,valid_exp1, test_exp1,AliSalim_Test 
 
 
 def prepare_dataset4exprement(dataset):
