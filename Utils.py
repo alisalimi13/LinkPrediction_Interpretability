@@ -313,7 +313,7 @@ def Cut_graph(dataset):
   Entity_count = len(Entities.keys())
   
   def my_sigmoid(x):
-    t = 1 / (1 + math.exp(-(x/3)))
+    t = 1 / (1 + math.exp(x/3))
     return  2-2*(1 -( t ))
   
   matrix = {}
