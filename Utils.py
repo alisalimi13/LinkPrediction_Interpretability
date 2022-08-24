@@ -298,7 +298,7 @@ def n2n_py():
   
 def Cut_graph(dataset):
   population_size = 100
-  generations     = 10
+  generations     = 200
   temp            = 4000 # init temprature
   good_ppl_rate   = 0.6 #0.65
   train,valid,test,Graph = read_dataset(dataset)
@@ -313,7 +313,7 @@ def Cut_graph(dataset):
   Entity_count = len(Entities.keys())
   
   def my_sigmoid(x):
-    t = 1 / (1 + math.exp(x/3))
+    t = 1 / (1 + math.exp(x/(generations/3))
     return  2-2*(1 -( t ))
   
   matrix = {}
