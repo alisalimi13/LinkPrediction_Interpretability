@@ -313,8 +313,8 @@ def Cut_graph(dataset):
   Entity_count = len(Entities.keys())
   
   def my_sigmoid(x):
-    t = 1 / (1 + math.exp(x/(generations/3))
-    return  2-2*(1 -( t ))
+    t = 1 / (1 + math.exp(x/(generations/3)))
+    return 2-2*(1 -( t ))
   
   matrix = {}
   for i in range(len(Graph)):
