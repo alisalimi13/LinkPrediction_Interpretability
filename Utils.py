@@ -299,22 +299,17 @@ def n2n_py():
 def Cut_graph(dataset):
   population_size = 100
   generations     = 200
-  temp            = 4000 # init temprature
-  good_ppl_rate   = 0.6 #0.65
+  temp            = 40000
+  good_ppl_rate   = 0.6
   train,valid,test,Graph = read_dataset(dataset)
-  WholeGraph = Graph
-  
+ 
   Entities = {}
-  for i,j,k in WholeGraph:
+  for i,j,k in Graph:
     if i not in Entities:
       Entities[i] = 1
     if k not in Entities:
       Entities[k] = 1
   Entity_count = len(Entities.keys())
-  
-  def my_sigmoid(x):
-    t = 1 / (1 + math.exp(x/(generations/3)))
-    return 2-2*(1 -( t ))
   
   matrix = {}
   for i in range(len(Graph)):
@@ -325,29 +320,17 @@ def Cut_graph(dataset):
           matrix[head].append(tail)
       elif tail not in matrix[head]:
           matrix[head].append(tail)
-  for i in range(len(Graph)):
-      tail = Graph[i][0]
-      head = Graph[i][2]
-      # tail, head =  head, tail
-      if head not in matrix:
-          matrix[head] = []
-          matrix[head].append(tail)
-      elif tail not in matrix[head]:
-          matrix[head].append(tail)
+      if tail not in matrix:
+          matrix[tail] = []
+          matrix[tail].append(head)
+      elif head not in matrix[tail]:
+          matrix[tail].append(head)
   
-#   Components = []
-#   graph_bfs = []
-#   for k,v in matrix.items():
-#       graph_bfs.append([k]+v)
+  def my_sigmoid(x):
+    t = 1 / (1 + math.exp(x/(generations/3)))
+    return 2-2*(1 -( t ))
   
-#   Entities = {}
-#   for i,j,k in WholeGraph:
-#     if i not in Entities:
-#       Entities[i] = 1
-#     if k not in Entities:
-#       Entities[k] = 1
-  
-  def get_vertices(WholeGraph):
+  def get_vertices(Graph):
     return list(range(Entity_count))
   
   def random_split(V,sample_size = 200, matrix = matrix): # mutation
@@ -373,9 +356,8 @@ def Cut_graph(dataset):
     return list(V1_new.keys()), list(V2_new.keys()),v_cuts
   
   city = []
-  V = get_vertices(WholeGraph)
+  V = get_vertices(Graph)
   for i in range(population_size):
-    #temp = int(temp*my_sigmoid(j))
     v1,v2,cut = random_split(V,temp)
     city.append([v1,v2,cut])
   
@@ -385,7 +367,6 @@ def Cut_graph(dataset):
     temp = int(temp*my_sigmoid(j))
     print([sorted([int(i[-1]) for i in city])[:10],sum([i[-1] for i in city])])
     death_cut = sorted([i[-1] for i in city])[int(len(city)*good_ppl_rate)-1]
-    #death_cut = city[int(len(city)*good_ppl_rate)-1]
     city = [i for i in city if i[-1] <= death_cut]
     new_ppl = []
     for i in range(len(city)):
@@ -394,7 +375,6 @@ def Cut_graph(dataset):
       new_ppl.append([v1,v2,cut])
     city += new_ppl
     immigs = []
-    # for i in range(population_size-len(city)):
     for i in range(40+min(0,population_size-len(city))):
       V11 = list(V)
       random.shuffle(V11)
@@ -403,8 +383,6 @@ def Cut_graph(dataset):
     city += immigs
   city = sorted(city,key=lambda l:l[-1])
   return city[0]
-# V1,V2,cut = Cut_graph(dataset)
-
 
 
 def remove_coonections_of_graphs(v1,v2,train,test,valid,rate = 0.01):
