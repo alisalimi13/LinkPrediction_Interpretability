@@ -336,7 +336,7 @@ def Cut_graph(dataset):
     t = 1 / (1 + math.exp(x/(generations/3)))
     return 2-2*(1 -( t ))
   
-  def get_vertices(Graph):
+  def get_vertices(Graph=Graph):
     return list(range(Entity_count))
   
   def random_split(V,sample_size = 200, matrix = matrix): # mutation
@@ -360,6 +360,40 @@ def Cut_graph(dataset):
           if i in V2_new:
             v_cuts += 1
     return list(V1_new.keys()), list(V2_new.keys()),v_cuts
+  
+  def reproduction(parent_1, parent_2, matrix)
+    set_1 = set(parent_1[0])
+    set_2 = set(parent_2[0])
+    intersection = set_1.intersection(set_2)
+    symmetric_difference = set_1.symmetric_difference(set_2)
+    size_of_symmetric_difference = len(symmetric_difference)
+    random_choice_from_sym_diff = set(random.sample(symmetric_difference, int(size_of_symmetric_difference/2))
+    child_v1 = intersection.union(random_choice_from_sym_diff)
+    child_v2 = set(get_vertices()).difference(child_v1)
+    child_v_cuts = 0
+    for v1 in child_v1:
+      if v1  in matrix:
+        for v2 in matrix[v1]:
+          if v2 in child_v2:
+            child_v_cuts += 1
+    child = (child_v1, child_v2, child_v_cuts)
+    return child
+  
+  def mutation(sample, temperature, matrix)
+    set_1 = set(sample[0])
+    set_2 = set(sample[1])
+    choices_from_s1 = set(random.sample(set_1, int(temperature/2)))
+    choices_from_s2 = set(random.sample(set_2, int(temperature/2)))
+    new_set_1 = set_1.difference(choices_from_s1).union(choices_from_s2)
+    new_set_2 = set_2.difference(choices_from_s2).union(choices_from_s1)
+    new_v_cuts = 0
+    for v1 in new_set_1:
+      if v1 in matrix:
+        for v2 in matrix[v1]:
+          if v2 in new_set_2:
+            new_v_cuts += 1
+    new_sample = (new_set_1, new_set_2, new_v_cuts)
+    return new_sample
   
   city = []
   V = get_vertices(Graph)
