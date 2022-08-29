@@ -330,8 +330,6 @@ def Cut_graph(dataset):
   print("number of vertexes:", Entity_count)
   print("number of edeges:", number_of_edges)
   
-  return
-  
   def my_sigmoid(x):
     t = 1 / (1 + math.exp(x/(generations/3)))
     return 2-2*(1 -( t ))
@@ -361,7 +359,21 @@ def Cut_graph(dataset):
             v_cuts += 1
     return list(V1_new.keys()), list(V2_new.keys()),v_cuts
   
-  def reproduction(parent_1, parent_2, matrix)
+  def random_sample():
+    vertices = get_vertices()
+    number_of_vertices = Entity_count
+    set_1 = set(random.sample(vertices, int(number_of_vertices/2)))
+    set_2 = vertices.difference(set_1)
+    number_of_cuts = 0
+    for v1 in set_1:
+      if v1  in matrix:
+        for v2 in matrix[v1]:
+          if v2 in set_2:
+            number_of_cuts += 1
+    random_sample = (set_1, set_2, number_of_cuts)
+    return random_sample
+  
+  def reproduction(parent_1, parent_2)
     set_1 = set(parent_1[0])
     set_2 = set(parent_2[0])
     intersection = set_1.intersection(set_2)
@@ -379,7 +391,7 @@ def Cut_graph(dataset):
     child = (child_v1, child_v2, child_v_cuts)
     return child
   
-  def mutation(sample, temperature, matrix)
+  def mutation(sample, temperature)
     set_1 = set(sample[0])
     set_2 = set(sample[1])
     choices_from_s1 = set(random.sample(set_1, int(temperature/2)))
