@@ -302,10 +302,6 @@ def Cut_graph(dataset):
   temp            = 4000
   good_ppl_rate   = 0.6
   train,valid,test,Graph = read_dataset(dataset)
-  
-  print("graph size:", len(Graph))
-  
-  return
  
   Entities = {}
   for i,j,k in Graph:
@@ -314,6 +310,7 @@ def Cut_graph(dataset):
     if k not in Entities:
       Entities[k] = 1
   Entity_count = len(Entities.keys())
+  number_of_edges = len(Graph)
   
   matrix = {}
   for i in range(len(Graph)):
@@ -329,6 +326,11 @@ def Cut_graph(dataset):
           matrix[tail].append(head)
       elif head not in matrix[tail]:
           matrix[tail].append(head)
+  
+  print("number of vertexes:" Entity_count)
+  print("number of edeges:", number_of_edges)
+  
+  return
   
   def my_sigmoid(x):
     t = 1 / (1 + math.exp(x/(generations/3)))
