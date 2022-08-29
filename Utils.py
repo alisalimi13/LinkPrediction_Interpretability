@@ -373,7 +373,7 @@ def Cut_graph(dataset):
     random_sample = (set_1, set_2, number_of_cuts)
     return random_sample
   
-  def reproduction(parent_1, parent_2)
+  def reproduction(parent_1, parent_2):
     set_1 = set(parent_1[0])
     set_2 = set(parent_2[0])
     intersection = set_1.intersection(set_2)
@@ -391,7 +391,7 @@ def Cut_graph(dataset):
     child = (child_v1, child_v2, child_v_cuts)
     return child
   
-  def mutation(sample, temperature)
+  def mutation(sample, temperature):
     set_1 = set(sample[0])
     set_2 = set(sample[1])
     choices_from_s1 = set(random.sample(set_1, int(temperature/2)))
