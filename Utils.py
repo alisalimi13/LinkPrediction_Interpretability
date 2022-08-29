@@ -299,9 +299,13 @@ def n2n_py():
 def Cut_graph(dataset):
   population_size = 100
   generations     = 200
-  temp            = 40000
+  temp            = 4000
   good_ppl_rate   = 0.6
   train,valid,test,Graph = read_dataset(dataset)
+  
+  print("graph size:", len(Graph))
+  
+  return
  
   Entities = {}
   for i,j,k in Graph:
