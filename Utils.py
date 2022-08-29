@@ -327,7 +327,7 @@ def Cut_graph(dataset):
       elif head not in matrix[tail]:
           matrix[tail].append(head)
   
-  print("number of vertexes:" Entity_count)
+  print("number of vertexes:", Entity_count)
   print("number of edeges:", number_of_edges)
   
   return
