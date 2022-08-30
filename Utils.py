@@ -407,22 +407,13 @@ def Cut_graph(dataset):
     new_sample = (new_set_1, new_set_2, new_v_cuts)
     return new_sample
   
-  parent_1 = random_sample()
-  parent_2 = random_sample()
-  child = reproduction(parent_1, parent_2)
-  mutated_child = mutation(child, temp)
-  print("parent_1:", len(parent_1[0]), len(parent_1[1]), parent_1[2])
-  print("parent_2:", len(parent_2[0]), len(parent_2[1]), parent_2[2])
-  print("child:", len(child[0]), len(child[1]), child[2])
-  print("mutated_child:", len(mutated_child[0]), len(mutated_child[1]), mutated_child[2])
-  
   city = []
   for i in range(population_size):
     city.append(random_sample())
   for i in range(generations):
     city = sorted(city,key=lambda l:l[-1])[:population_size-1]
     temp = int(temp*my_sigmoid(j))
-    print([j for j in city])
+    print(city)
     return
     
   for j in range(generations):
