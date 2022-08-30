@@ -416,14 +416,15 @@ def Cut_graph(dataset):
   print("child:", len(child[0]), len(child[1]), child[2])
   print("mutated_child:", len(mutated_child[0]), len(mutated_child[1]), mutated_child[2])
   
-  return
-  
   city = []
-  V = get_vertices(Graph)
   for i in range(population_size):
-    v1,v2,cut = random_split(V,temp)
-    city.append([v1,v2,cut])
-  
+    city.append(random_sample())
+  for i in range(generations):
+    city = sorted(city,key=lambda l:l[-1])[:population_size-1]
+    temp = int(temp*my_sigmoid(j))
+    print([j for j in city])
+    return
+    
   for j in range(generations):
     city = sorted(city,key=lambda l:l[-1])
     city = city[:population_size-1]
