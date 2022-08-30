@@ -379,7 +379,7 @@ def Cut_graph(dataset):
     intersection = set_1.intersection(set_2)
     symmetric_difference = set_1.symmetric_difference(set_2)
     size_of_symmetric_difference = len(symmetric_difference)
-    random_choice_from_sym_diff = set(random.sample(symmetric_difference, int(size_of_symmetric_difference/2))
+    random_choice_from_sym_diff = set(random.sample(symmetric_difference, int(size_of_symmetric_difference/2)))
     child_v1 = intersection.union(random_choice_from_sym_diff)
     child_v2 = set(get_vertices()).difference(child_v1)
     child_v_cuts = 0
