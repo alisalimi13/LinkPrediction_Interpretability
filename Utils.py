@@ -407,6 +407,17 @@ def Cut_graph(dataset):
     new_sample = (new_set_1, new_set_2, new_v_cuts)
     return new_sample
   
+  parent_1 = random_sample()
+  parent_2 = random_sample()
+  child = reproduction(parent_1, parent_2)
+  mutated_child = mutation(child, temp)
+  print("parent_1:", parent_1)
+  print("parent_2:", parent_2)
+  print("child:", child)
+  print("mutated_child:", mutated_child)
+  
+  return
+  
   city = []
   V = get_vertices(Graph)
   for i in range(population_size):
