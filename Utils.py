@@ -413,7 +413,7 @@ def Cut_graph(dataset):
   for i in range(generations):
     city = sorted(city,key=lambda l:l[-1])[:population_size-1]
     temp = int(temp*my_sigmoid(j))
-    print(city)
+    print([j[2] for j in city][:10])
     return
     
   for j in range(generations):
