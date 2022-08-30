@@ -360,7 +360,7 @@ def Cut_graph(dataset):
     return list(V1_new.keys()), list(V2_new.keys()),v_cuts
   
   def random_sample():
-    vertices = get_vertices()
+    vertices = set(get_vertices())
     number_of_vertices = Entity_count
     set_1 = set(random.sample(vertices, int(number_of_vertices/2)))
     set_2 = vertices.difference(set_1)
