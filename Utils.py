@@ -411,10 +411,10 @@ def Cut_graph(dataset):
   parent_2 = random_sample()
   child = reproduction(parent_1, parent_2)
   mutated_child = mutation(child, temp)
-  print("parent_1:", parent_1)
-  print("parent_2:", parent_2)
-  print("child:", child)
-  print("mutated_child:", mutated_child)
+  print("parent_1:", len(parent_1[0]), len(parent_1[1]), parent_1[2])
+  print("parent_2:", len(parent_2[0]), len(parent_2[1]), parent_2[2])
+  print("child:", len(child[0]), len(child[1]), child[2])
+  print("mutated_child:", len(mutated_child[0]), len(mutated_child[1]), mutated_child[2])
   
   return
   
