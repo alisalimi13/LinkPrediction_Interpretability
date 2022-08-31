@@ -298,11 +298,16 @@ def n2n_py():
   
 def Cut_graph(dataset):
   population_size = 100
-  generations     = 200
+  generations     = 10
   temp            = 4000
   good_ppl_rate   = 0.6
+  migration_rate  = 0.1
   train,valid,test,Graph = read_dataset(dataset)
- 
+  
+  weights = list()
+  for i in reversed(range(int(population_size*good_ppl_rate))):
+    weights.append(i+1)
+  
   Entities = {}
   for i,j,k in Graph:
     if i not in Entities:
@@ -410,12 +415,22 @@ def Cut_graph(dataset):
   city = []
   for i in range(population_size):
     city.append(random_sample())
+  city = sorted(city, key=lambda l:l[-1])
+  print([sorted([int(j[-1]) for j in city])[:10],sum([j[-1] for j in city])])
   for i in range(generations):
-    city = sorted(city,key=lambda l:l[-1])[:population_size-1]
-    temp = int(temp*my_sigmoid(j))
-    print([j[2] for j in city][:10])
-    return
-    
+    temp = int(temp*my_sigmoid(i))
+    city = city[:int(population_size*good_ppl_rate)]
+    for j in range(int(population_size*(1-good_ppl_rate))):
+      parents = random.choices(city, k=2, weights=weights)
+      child = reproduction(parents[0], parents[1])
+      mutated_child = mutation(child, temp)
+    for j in range(int(population_size*migration_rate)):
+      city.append(random_sample())
+    city = sorted(city, key=lambda l:l[-1])[:population_size]
+    print([sorted([int(j[-1]) for j in city])[:10],sum([j[-1] for j in city])])
+  
+  return city[0]
+  
   for j in range(generations):
     city = sorted(city,key=lambda l:l[-1])
     city = city[:population_size-1]
