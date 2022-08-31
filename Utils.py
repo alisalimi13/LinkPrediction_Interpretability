@@ -298,7 +298,7 @@ def n2n_py():
   
 def Cut_graph(dataset):
   population_size = 100
-  generations     = 10
+  generations     = 100
   temp            = 4000
   good_ppl_rate   = 0.6
   migration_rate  = 0.1
