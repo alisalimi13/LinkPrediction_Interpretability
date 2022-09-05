@@ -424,6 +424,7 @@ def Cut_graph(dataset):
       parents = random.choices(city, k=2, weights=weights)
       child = reproduction(parents[0], parents[1])
       mutated_child = mutation(child, temp)
+      city.append(mutated_child)
     for j in range(int(population_size*migration_rate)):
       city.append(random_sample())
     city = sorted(city, key=lambda l:l[-1])[:population_size]
