@@ -420,11 +420,13 @@ def Cut_graph(dataset):
   for i in range(generations):
     temp = int(temp*my_sigmoid(i))
     city = city[:int(population_size*good_ppl_rate)]
+    new_population = list()
     for j in range(int(population_size*(1-good_ppl_rate))):
       parents = random.choices(city, k=2, weights=weights)
       child = reproduction(parents[0], parents[1])
       mutated_child = mutation(child, temp)
-      city.append(mutated_child)
+      new_population.append(mutated_child)
+    city.extend(new_population)
     for j in range(int(population_size*migration_rate)):
       city.append(random_sample())
     city = sorted(city, key=lambda l:l[-1])[:population_size]
